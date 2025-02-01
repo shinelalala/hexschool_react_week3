@@ -69,11 +69,12 @@ function App() {
 
   const checkUserLogin = async () => {
     try {
-      axios.post(`${BASE_URL}/v2/api/user/check`);
+      await axios.post(`${BASE_URL}/v2/api/user/check`);
       getProducts();
       setIsAuth(true);
     } catch (error) {
-      console.error(error)
+      setIsAuth(false);
+      console.error(error);
     }
   }
 
@@ -282,7 +283,7 @@ function App() {
           </div>
         </div>
       </div>) :
-      <div className="d-flex flex-column justify-content-center align-items-center vh-100">
+      (<div className="d-flex flex-column justify-content-center align-items-center vh-100">
       <h1 className="mb-5">請先登入</h1>
       <form className="d-flex flex-column gap-3">
         <div className="form-floating mb-3">
@@ -297,7 +298,7 @@ function App() {
       </form>
       <p className="mt-5 mb-3 text-muted">&copy; 2024~∞ - 六角學院</p>
       </div>
-      }
+      )}
 
       <div ref={productModalRef} id="productModal" className="modal" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
         <div className="modal-dialog modal-dialog-centered modal-xl">
